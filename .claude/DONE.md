@@ -2,6 +2,9 @@
 
 Newest first. Finished tasks live here; each commit is documented in `commits/`.
 
+## 2026-11-08: Screens and button confirmed
+- Checked at the board: the five LCD screens and the button work.
+
 ## 2026-11-08: Live data on the board
 - Saved the Wi-Fi details with `make setup`; the board joins the 2.4 GHz network.
 - Confirmed planes and routes arrive over the CLI `status` command.
