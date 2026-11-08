@@ -19,6 +19,8 @@ A Waveshare ESP32-C6-LCD-1.3 on the local Wi-Fi shows the three planes closest t
 - The Wi-Fi password is stored unencrypted in flash, so anyone with physical access to the board could extract it. It is never shown on the LCD or by `status`.
 - HTTPS certificates are not verified. The data is public and no credentials are sent, so the worst case is wrong planes on the screen.
 - The partition scheme is `huge_app` (3 MB firmware, no over-the-air updates).
+- The Wi-Fi network must be on 2.4 GHz. The ESP32-C6 has no 5 GHz radio.
+- Wi-Fi power saving is off. With it on, about a quarter of HTTPS connections timed out. The board runs from USB, so the extra power use doesn't matter.
 
 ## Structure
 | File in `firmware/esp32_plane/` | Purpose |
@@ -40,6 +42,6 @@ A Waveshare ESP32-C6-LCD-1.3 on the local Wi-Fi shows the three planes closest t
 ## Leaving download mode
 The `dfu` command sets the chip's `LP_AON_FORCE_DOWNLOAD_BOOT` flag, which survives a normal reset. The board keeps returning to download mode until the flag is cleared or the power is removed. `make flash` and `make leave-dfu` clear it. Tested on the board on 2026-11-08.
 
-Serial tools should open the port with DTR and RTS off. Asserting them on open can reset this chip into download mode, as a test script did during development.
+Serial tools should open the port with DTR and RTS off. Asserting them on open can reset this chip into download mode, as a test script did during development. Even with both off, opening the port restarts the firmware, so Wi-Fi reconnects each time.
 
 Personal values go in `.env`, which is ignored by git. `.env.example` lists the keys.

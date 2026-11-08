@@ -37,9 +37,10 @@ void feedWake() {
 // is not verified. See docs/design.md.
 static int openJson(HTTPClient &http, WiFiClientSecure &client, const String &url) {
   client.setInsecure();
-  client.setTimeout(HTTP_TIMEOUT_MS / 1000);
+  client.setHandshakeTimeout(HTTP_TIMEOUT_MS / 1000);  // the library default is 120 s
+  http.setConnectTimeout(HTTP_TIMEOUT_MS);             // the library default of 5 s is too short here
   http.setTimeout(HTTP_TIMEOUT_MS);
-  http.useHTTP10(true);  // no chunked encoding, so ArduinoJson can read the stream
+  http.useHTTP10(true);  // no chunked encoding
   http.setUserAgent(USER_AGENT);
   if (!http.begin(client, url)) return -1;
   return http.GET();
@@ -86,8 +87,11 @@ static int fetchPlanes(const Settings &where, FeedSnapshot &next) {
     item[key] = true;
   }
 
+  // Read the whole reply first. On a TLS client, readBytes() stops at any pause between
+  // packets, so parsing from the stream fails with IncompleteInput.
+  String body = http.getString();
   JsonDocument doc;
-  DeserializationError err = deserializeJson(doc, http.getStream(), DeserializationOption::Filter(filter));
+  DeserializationError err = deserializeJson(doc, body, DeserializationOption::Filter(filter));
   http.end();
   if (err) {
     Serial.printf("feed: bad JSON: %s\n", err.c_str());
@@ -124,8 +128,9 @@ static bool fetchRoute(const char *flight, char *route, size_t routeSize) {
     return false;
   }
 
+  String body = http.getString();
   JsonDocument doc;
-  DeserializationError err = deserializeJson(doc, http.getStream());
+  DeserializationError err = deserializeJson(doc, body);
   http.end();
   if (err) return false;
 

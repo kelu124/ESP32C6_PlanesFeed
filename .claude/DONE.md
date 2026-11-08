@@ -2,6 +2,11 @@
 
 Newest first. Finished tasks live here; each commit is documented in `commits/`.
 
+## 2026-11-08: Live data on the board
+- Saved the Wi-Fi details with `make setup`; the board joins the 2.4 GHz network.
+- Confirmed planes and routes arrive over the CLI `status` command.
+- Fixed unreliable requests: 26 of 26 succeeded in a 5-minute test.
+
 ## 2026-11-08: Plane tracker firmware
 - Agreed the design in `docs/design.md`, using adsb.fi for planes and adsbdb for routes.
 - Built the firmware: five screens, button cycling, USB CLI, saved Wi-Fi and location, `dfu` command.

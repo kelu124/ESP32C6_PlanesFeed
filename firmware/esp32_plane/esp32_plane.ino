@@ -159,6 +159,7 @@ void setup() {
   uiBegin();
   WiFi.persistent(false);  // credentials live only in our own settings
   WiFi.mode(WIFI_STA);
+  WiFi.setSleep(false);  // power saving delays traffic enough to make HTTPS connections time out
   WiFi.setAutoReconnect(true);
   connectWifi();
   feedStart();
