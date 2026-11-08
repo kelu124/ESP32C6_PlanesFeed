@@ -4,6 +4,6 @@ Firmware for a Waveshare ESP32-C6-LCD-1.3 that joins the local Wi-Fi and shows t
 
 ## Working rules
 - At session start, review `.claude/TODO.md` with the user. A hook prints it automatically.
-- Every commit is documented: a commit message that explains what changed and why, plus a matching entry in `.claude/DONE.md` in the same commit.
+- Every commit is documented in `.claude/commits/`, in the same commit. Follow the `commit-docs` skill in `.claude/skills/`.
 - When a task is finished, move it from `.claude/TODO.md` to `.claude/DONE.md`.
 - Never commit Wi-Fi credentials.
