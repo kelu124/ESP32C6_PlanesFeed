@@ -8,13 +8,15 @@ The board fetches live aircraft positions from [adsb.fi](https://github.com/adsb
 
 Each press of the BOOT button moves to the next screen. The last-used screen is restored at power-on.
 
-| Screen | Shows |
-|---|---|
-| Overhead | The top 3 planes as rows: flight, distance, type, altitude, speed and heading |
-| Nearest | The closest plane in detail with its route, then the other two |
-| Radar | The top 3 on a 20 km north-up radar |
-| Wi-Fi | Connection state, network, IP address, signal and age of the last data |
-| Location | Saved coordinates and search radius |
+| Render | Screen | Shows |
+|---|---|---|
+| <img src="docs/images/overhead.png" width="200" alt="Overhead screen listing three planes as rows"> | Overhead | The top 3 planes as rows: flight, distance, type, altitude, speed and heading |
+| <img src="docs/images/nearest.png" width="200" alt="Nearest screen with the closest plane's details and route"> | Nearest | The closest plane in detail with its route, then the other two |
+| <img src="docs/images/radar.png" width="200" alt="Radar screen plotting three planes around the observer"> | Radar | The top 3 on a 20 km north-up radar |
+| <img src="docs/images/wifi.png" width="200" alt="Wi-Fi screen with connection details"> | Wi-Fi | Connection state, network, IP address, signal and age of the last data |
+| <img src="docs/images/location.png" width="200" alt="Location screen with saved coordinates and search radius"> | Location | Saved coordinates and search radius |
+
+The images are renders of the firmware's screen code using sample data, not photos of the board.
 
 The plane screens say what is missing when Wi-Fi or the location isn't set, and when no planes are nearby. Data older than 30 seconds shows its age in red.
 
