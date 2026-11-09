@@ -10,7 +10,7 @@
 
 static const char USER_AGENT[] = "esp32-plane/1.0";
 static const uint32_t HTTP_TIMEOUT_MS = 8000;
-static const int ROUTE_TEXT_CHARS = 20;  // width of the route line on the LCD
+static const int ROUTE_TEXT_CHARS = 18;  // the route line on the LCD: 224 px at 12 px per character
 
 static SemaphoreHandle_t lock;
 static TaskHandle_t task;

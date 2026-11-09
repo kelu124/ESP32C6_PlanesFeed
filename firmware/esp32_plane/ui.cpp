@@ -174,10 +174,14 @@ static void drawRadar(const FeedSnapshot &feed) {
 }
 
 static void keyValue(int y, const char *key, const char *value) {
+  // The value is padded to fill the space beside the key, so a redraw without a clear
+  // erases the old value without touching the key. Long values keep their last characters.
+  int keyRight = MARGIN + (int)strlen(key) * CHAR_W;
+  size_t maxChars = (LCD_SIZE - MARGIN - keyRight - CHAR_W) / (CHAR_W * 2);
   char padded[32];
-  snprintf(padded, sizeof(padded), "%18s", value);
+  snprintf(padded, sizeof(padded), "%*s", (int)maxChars, value);
   text(MARGIN, y + 3, 1, DIM_TEXT, key);
-  textRight(LCD_SIZE - MARGIN, y, 2, WHITE_TEXT, padded + (strlen(padded) > 14 ? strlen(padded) - 14 : 0));
+  textRight(LCD_SIZE - MARGIN, y, 2, WHITE_TEXT, padded + (strlen(padded) > maxChars ? strlen(padded) - maxChars : 0));
   gfx->drawFastHLine(MARGIN, y + 24, LCD_SIZE - 2 * MARGIN, LINE);
 }
 
