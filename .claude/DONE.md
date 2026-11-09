@@ -2,6 +2,11 @@
 
 Newest first. Finished tasks live here; each commit is documented in `commits/`.
 
+## 2026-11-09: README, license and LCD text fixes
+- Rewrote the README with the design, setup and CLI, and added screen renders in `docs/images/`.
+- Added the MIT license, which covers the code only and not the plane or route data.
+- Fixed the cut-off "Search radius" label and routes too long for their line. Not yet flashed; see `TODO.md`.
+
 ## 2026-11-08: Screens and button confirmed
 - Checked at the board: the five LCD screens and the button work.
 
